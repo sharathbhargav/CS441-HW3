@@ -35,7 +35,12 @@ libraryDependencies ++= Seq(
   "commons-io" % "commons-io" % "20030203.000550",
  "com.amazonaws" % "aws-lambda-java-core" % "1.2.1",
 "com.amazonaws" % "aws-lambda-java-events" % "3.10.0",
-  "org.scalaj" %% "scalaj-http" % "2.4.2"
+  "org.scalaj" %% "scalaj-http" % "2.4.2",
+  "com.thesamet.scalapb" %% "scalapb-json4s" % "0.12.0",
+  "com.typesafe.akka" %% "akka-actor" % "2.5.26",
+  "com.typesafe.akka" %% "akka-http" % "10.1.11",
+  "com.typesafe.akka" %% "akka-stream" % "2.5.26",
+  "com.typesafe.akka" %% "akka-http-spray-json" % "10.1.11"
 
 
 )
