@@ -10,6 +10,10 @@ class GrpcClient {
 
 }
 
+/**
+ * This object serves as a GRPC client and invokes the remote method "findLog" on the GRPC server. Currently a blocking
+ * call is executed but a non-blocking call as well can be executed which involves using futures.
+ */
 
 object GrpcClient  {
   val config = ConfigFactory.load()

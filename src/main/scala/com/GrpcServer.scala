@@ -18,6 +18,11 @@ object GrpcServer  {
   }
 }
 
+/**
+ * This class creates the GRPC server and allows clients to invoke methods remotely.
+ * It inturn makes a http request to lambda function hosted on AWS to get the hash of a set of matching log messages.
+ * @param executionContext
+ */
 class GrpcServer(executionContext: ExecutionContext) {
   val config = ConfigFactory.load()
   val logger = CreateLogger(classOf[GrpcClient])

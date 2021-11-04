@@ -10,10 +10,11 @@ import java.util.Base64
 import scala.collection.convert.ImplicitConversions.`map AsScala`
 import scala.jdk.CollectionConverters.MapHasAsJava
 
-
-//import hello.{HelloReply, HelloRequest}
-
-
+/**
+ * This class contains the method executed by the lambda function on AWS. It accepts input in protobuf format and responds
+ * in protobuf format. It takes time and interval as input and outputs either a single hash value or a 404 error indicating
+ * no logs were found within that interval.
+ */
 class lambda1 extends RequestHandler[APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent] {
 
   /**
@@ -24,7 +25,7 @@ class lambda1 extends RequestHandler[APIGatewayProxyRequestEvent, APIGatewayProx
     val logger = context.getLogger
     logger.log(s"Request ${input.toString}")
     val headers = input.getHeaders
-    val key_name =  if( headers.containsKey("content-type")) "content-type"  else  "Content-Type"
+    val key_name = if (headers.containsKey("content-type")) "content-type" else "Content-Type"
     val dat = headers(key_name) match {
       case "application/grpc+proto" => {
         logger.log("Input header contains application/grpc+proto")
@@ -44,7 +45,7 @@ class lambda1 extends RequestHandler[APIGatewayProxyRequestEvent, APIGatewayProx
     }
     val dateComponent = HelperUtils.getDateComponentString(dat.time)
     logger.log(s"Parsed date component = ${dateComponent}")
-    val data = AccessS3.access(dat.time,logger)
+    val data = AccessS3.access(dat.time, logger)
     logger.log(s"data = ${dat.time}")
     val hash = log_process1.start(dat.time, dat.interval, data, logger)
 

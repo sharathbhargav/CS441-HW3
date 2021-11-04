@@ -16,6 +16,10 @@ class log_process1 {
 
 }
 
+/**
+ * This is the main business logic which accepts a time, interval, and an array of log messages and finds the messages
+ * that match a certain pattern withing the time-interval to time+interval range.
+ */
 object log_process1 {
   val config: Config = ConfigFactory.load()
   val logger: Logger = CreateLogger(classOf[GrpcClient])
@@ -26,7 +30,6 @@ object log_process1 {
   dateFormatter.setTimeZone(tz)
 
   val timeFormatter = new SimpleDateFormat("HH:mm:ss.S")
-//  val lines = Source.fromFile("/home/sharath/fall_2021/441/a3/scala_lambd/logs/LogFileGenerator.1.log").getLines.toArray
 
   def main(args: Array[String]):Unit={
   }
@@ -81,6 +84,15 @@ object log_process1 {
       false
   }
 
+  /**
+   * This is an altered binary search that is used to find the log messages whose timestamp is closest to given timestamp
+   * Hence the use of vars.
+   * @param arr
+   * @param el
+   * @param l
+   * @param h
+   * @return
+   */
   def IterativeBinarySearch(arr: Array[String],
                             el: Long, l: Int, h: Int): Int = {
     var low = l

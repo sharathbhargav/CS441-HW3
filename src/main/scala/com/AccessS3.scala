@@ -16,6 +16,10 @@ class AccessS3 {
 
 }
 
+/**
+ * This object is used to find a file matching the date input given in the S3 bucket. Then the contents of
+ * the file are fetched and stored in a array of string
+ */
 object AccessS3 {
   val config = ConfigFactory.load()
   val logger = CreateLogger(classOf[AccessS3])

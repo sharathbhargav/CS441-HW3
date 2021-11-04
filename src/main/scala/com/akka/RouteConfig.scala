@@ -15,12 +15,19 @@ final case class LogResponseAkka(hash: String)
 
 case class LogRequestAkka(time: String, interval: String)
 
-trait LogResponseAkkaObj extends SprayJsonSupport with DefaultJsonProtocol {
+trait LogAkkaObj extends SprayJsonSupport with DefaultJsonProtocol {
   implicit val logFormat = jsonFormat1(LogResponseAkka)
   implicit val logRequestFormat = jsonFormat2(LogRequestAkka)
 }
 
-class RouteConfig(implicit val system: ActorSystem) extends Directives with LogResponseAkkaObj {
+
+/**
+ * This class defines the routes that are supported by the Akka web server. For each route defined, a set of actions can
+ * be defined. In this class the POST and GET methods make a http call to lambda function hosted on AWS to get the hash
+ * of a set of matching log messages with a time interval.
+ * @param system
+ */
+class RouteConfig(implicit val system: ActorSystem) extends Directives with LogAkkaObj {
 
   val config = ConfigFactory.load()
   val logger = CreateLogger(classOf[RouteConfig])

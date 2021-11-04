@@ -13,6 +13,11 @@ import akka.stream.ActorMaterializer
 import scala.concurrent.ExecutionContextExecutor
 import scala.io.StdIn
 
+/**
+ * This object is used to create the Akka web server at a defined address and port.
+ *
+ */
+
 object WebServer {
   implicit val system: ActorSystem = ActorSystem("web-app")
   private implicit val dispatcher: ExecutionContextExecutor = system.dispatcher
