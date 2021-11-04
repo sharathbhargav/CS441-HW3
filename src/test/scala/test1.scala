@@ -1,3 +1,4 @@
+import com.Utilities.HelperUtils
 import com.Utilities.HelperUtils.getIntervalTime
 import com.amazonaws.services.lambda.runtime.LambdaLogger
 import com.log_process1
@@ -25,6 +26,10 @@ class test1 extends AnyFlatSpec with Matchers{
   it should "Test md5 hash value" in {
     val str = "test string"
     log_process1.md5(str) shouldBe("6f8db599de986fab7a21625b7916589c")
+  }
+
+  it should "Get date object" in {
+    HelperUtils.getDateComponentString("2021-11-03 10:19:50.082") shouldBe("2021-11-03")
   }
 
  it should "Test range of time successful" in {
