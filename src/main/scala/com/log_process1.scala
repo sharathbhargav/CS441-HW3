@@ -39,7 +39,7 @@ object log_process1 {
     val end_time_object = time_required_formatted.getTime + time_interval_formatted.getTime
     lambdaLogger.log(s"time required formatted = ${time_required_formatted.toString}")
     lambdaLogger.log(s"start time = $start_time_object end time = $end_time_object,  lines1 = ${lines(0)}, len = ${lines.length}")
-    if (checkRange(start_time_object, end_time_object, lines(0), lines(lines.length - 1),lambdaLogger)) {
+    if (checkRange(start_time_object, end_time_object, lines(0), lines(lines.length - 1))) {
       val start_line = IterativeBinarySearch(lines, start_time_object, 0, lines.length - 1)
       val end_line = IterativeBinarySearch(lines, end_time_object, start_line, lines.length - 1)
       val newList = lines.slice(start_line, end_line)
@@ -66,7 +66,7 @@ object log_process1 {
     hashedString
   }
 
-  def checkRange(t1: Long, t2: Long, r1: String, r2: String,lambdaLogger:LambdaLogger): Boolean = {
+  def checkRange(t1: Long, t2: Long, r1: String, r2: String): Boolean = {
     val m1 = pattern.matcher(r1)
     val m2 = pattern.matcher(r2)
 
@@ -75,7 +75,6 @@ object log_process1 {
       val range2 = getIntervalTime(m2.group(1).trim)
       val tt1 = new Date(t1)
       val tt2 = new Date(t2)
-      lambdaLogger.log(s"first time = ${tt1.getTime}  second time = ${tt2.getTime}")
       tt1.after(range1) && tt2.before(range2)
     }
     else

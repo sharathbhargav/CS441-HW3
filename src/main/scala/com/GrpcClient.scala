@@ -4,6 +4,7 @@ import Log.{LogProcessorGrpc, LogReply, LogRequest}
 import com.Utilities.CreateLogger
 import com.typesafe.config.ConfigFactory
 import io.grpc.ManagedChannelBuilder
+import io.grpc.netty.NettyChannelBuilder
 import scalaj.http.Http
 class GrpcClient {
 
@@ -22,9 +23,12 @@ object GrpcClient  {
     val channelBuilder = ManagedChannelBuilder.forAddress("localhost", config.getInt("log.grpc_port"))
     channelBuilder.usePlaintext()
     val channel = channelBuilder.build()
-    val request=LogRequest("2021-11-01 10:22:22.540","00:00:00.900")
+    val request=LogRequest(config.getString("log.search_string_time"),config.getString("log.search_string_interval"))
     val blockingStub = LogProcessorGrpc.blockingStub(channel)
     val reply: LogReply = blockingStub.findLog(request)
-    println(reply.message)
+    if(reply.message.equals(""))
+      logger.info("No log messages found")
+    else
+    logger.info(s"Hash of log message = ${reply.message}")
   }
 }

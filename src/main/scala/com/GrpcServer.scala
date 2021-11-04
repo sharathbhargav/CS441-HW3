@@ -34,10 +34,20 @@ class GrpcServer(executionContext: ExecutionContext) {
       val response = httpRequest.asBytes
       logger.info(s"Got response: $response")
       logger.info(s"Got response: ${response.body.mkString}")
-
-      // Parse response from API to protobuf Response object
-      val responseMessage = LogReply.parseFrom(response.body)
-      Future.successful(responseMessage)
+      if(response.code==200) {
+        // Parse response from API to protobuf Response object
+        try {
+          val responseMessage = LogReply.parseFrom(response.body)
+          Future.successful(responseMessage)
+        }
+        catch {
+          case e: Exception =>
+            Future.failed(e)
+        }
+      }
+      else{
+        Future.successful(LogReply(""))
+      }
     }
   }
   var server: Server = null
