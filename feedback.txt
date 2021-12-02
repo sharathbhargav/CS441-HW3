@@ -3,7 +3,7 @@ Grader: Vineet Patel
 
 Grading Criteria: 
  - only some basic RESTful service examples from some repos are given and nothing else is done: zero grade;
-	* Missing one lambda function: -2%
+	* functionality complete: -0%
  - having less than five unit and/or integration scalatests: up to 5% lost;
 	* tests present: -0%
  - missing comments and explanations from your program: up to 5% lost;
@@ -24,6 +24,5 @@ Grading Criteria:
 	* documentation present: -0%
 
 	
-Total Grade: 6%
-Comments: It seems you are missing the lambda function to check if any log messages exist between a time range. 
-You should end up having 2 lambda functions.
+Total Grade: 8%
+Comments: Good job!
